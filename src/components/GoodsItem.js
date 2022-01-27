@@ -1,22 +1,16 @@
 import React, { PureComponent } from "react";
 import "../styles.css";
+import { connect } from "react-redux";
 // import store from '../redux/store';
-// import addToCard from '../redux/actions';
+import addToCard from "../redux/actions";
 
 
 class GoodsItem extends PureComponent {
-
-  // addToCart = (id) => {
-  //     store.dispatch(addToCard(id))
-  // } 
-
-   mapDispatchToProps = dispatch => ({
-    addToCart: (id) => dispatch(addToCart(id))
-  })
-
+  
   render() {
     const { title, description, price, id } = this.props;
-
+   console.log(this.props.addToCart);
+   
     return (
       <div className="goods-item" key={id}>
         <h3 className="goods-item__title">{title}</h3>
@@ -31,4 +25,12 @@ class GoodsItem extends PureComponent {
   }
 }
 
-export default GoodsItem;
+const mapDispatchToProps = dispatch => ({
+  addToCart: (id) => dispatch(addToCart(id))
+})
+
+const mapStateToProps = (state) => ({
+    goods: state.goods,
+});
+const connector = connect(mapStateToProps, mapDispatchToProps)
+export default connector(GoodsItem)

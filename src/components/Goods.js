@@ -13,11 +13,6 @@ class Goods extends PureComponent {
   //   const state = store.getState();
   //   this.setState({goods: state.goods })
   // }
-  mapStateToProps = (state) => {
-    return {
-      goods: state.goods,
-    }
-  };
 
   render() {
     return (
@@ -34,5 +29,10 @@ class Goods extends PureComponent {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    goods: state.goods,
+  }
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Goods)
+export default connect(mapStateToProps)(Goods)
