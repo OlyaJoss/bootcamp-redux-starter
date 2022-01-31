@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import "../styles.css";
 import { connect } from "react-redux";
 // import store from '../redux/store';
-import addToCard from "../redux/actions";
+import { addToCart } from "../redux/actions";
 
 
 class GoodsItem extends PureComponent {
@@ -29,8 +29,4 @@ const mapDispatchToProps = dispatch => ({
   addToCart: (id) => dispatch(addToCart(id))
 })
 
-const mapStateToProps = (state) => ({
-    goods: state.goods,
-});
-const connector = connect(mapStateToProps, mapDispatchToProps)
-export default connector(GoodsItem)
+export default connect(null, mapDispatchToProps)(GoodsItem)

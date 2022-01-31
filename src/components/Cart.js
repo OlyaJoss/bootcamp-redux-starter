@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import "../styles.css";
 import { connect } from "react-redux";
-
+import { delFromCart } from "../redux/actions";
 import CartItem from './CartItem';
 
 class Cart extends PureComponent {
@@ -31,6 +31,7 @@ class Cart extends PureComponent {
             {this.props.cartGoods.map((item, index) => (
               <li className="cart__list-item" key={index}>
                 <CartItem {...item} />
+                <button onClick={()=> this.props.delFromCart(item.id)}>x</button>
               </li>
             ))}
           </ul>
@@ -44,10 +45,14 @@ class Cart extends PureComponent {
   }
 }
 
+ const mapDispatchToProps = dispatch => ({
+  delFromCart: (id) => dispatch(delFromCart(id))
+ })
+
 const mapStateToProps = (state) => {
   return {
-    cartGoods: state.goods,
+    cartGoods: state.cart,
   }
 };
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

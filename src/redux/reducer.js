@@ -24,13 +24,15 @@ const initialState = {
 }
 
 function reducer(state = initialState, action) {
-    if(action.type === 'ADD_TO_CART') {
-        const good = state.goods.find((item)=> item.id === action.payload.id)
-        const cart = [ ...state.cart, {...good}]
+    if (action.type === 'ADD_TO_CART') {
+        const good = state.goods.find((item) => item.id === action.payload.id)
+        const cart = [...state.cart, { ...good }]
         return {
             ...state,
             cart
         }
+    } else if (action.type === 'DEL_FROM_CART') {
+        state.cart.filter((item) => item.id !== action.payload.id)
     }
     return state
 }
